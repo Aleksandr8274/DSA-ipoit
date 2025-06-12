@@ -1,8 +1,9 @@
-package by.it.a_khmelev.lesson03;
+package by.it.group410971.maleckij.lesson03;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -43,56 +44,75 @@ public class C_HeapMax {
     }
 
     //эта процедура читает данные из файла, ее можно не менять.
-    public Long findMaxValue(InputStream stream) {
+    Long findMaxValue(InputStream stream) {
         Long maxValue = 0L;
         MaxHeap heap = new MaxHeap();
-        //прочитаем строку для кодирования из тестового файла
         Scanner scanner = new Scanner(stream);
         Integer count = scanner.nextInt();
-        for (int i = 0; i < count; ) {
+        scanner.nextLine(); // consume the rest of the line
+
+        for (int i = 0; i < count; i++) {
             String s = scanner.nextLine();
             if (s.equalsIgnoreCase("extractMax")) {
                 Long res = heap.extractMax();
-                if (res != null && res > maxValue) maxValue = res;
-                System.out.println();
+                if (res != null && res > maxValue) {
+                    maxValue = res;
+                }
                 i++;
-            }
-            if (s.contains(" ")) {
+            } else if (s.startsWith("Insert ")) {
                 String[] p = s.split(" ");
-                if (p[0].equalsIgnoreCase("insert"))
-                    heap.insert(Long.parseLong(p[1]));
+                heap.insert(Long.parseLong(p[1]));
                 i++;
-                //System.out.println(heap); //debug
             }
         }
         return maxValue;
     }
 
     private class MaxHeap {
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! НАЧАЛО ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-        //тут запишите ваше решение.
-        //Будет мало? Ну тогда можете его собрать как Generic и/или использовать в варианте B
         private List<Long> heap = new ArrayList<>();
 
-        int siftDown(int i) { //просеивание вверх
-
+        private int siftDown(int i) {
+            int left = 2 * i + 1;
+            int right = 2 * i + 2;
+            int largest = i;
+            if (left < heap.size() && heap.get(left) > heap.get(largest)) {
+                largest = left;
+            }
+            if (right < heap.size() && heap.get(right) > heap.get(largest)) {
+                largest = right;
+            }
+            if (largest != i) {
+                Collections.swap(heap, i, largest);
+                return siftDown(largest);
+            }
             return i;
         }
 
-        int siftUp(int i) { //просеивание вниз
-
+        private int siftUp(int i) {
+            while (i > 0 && heap.get(i) > heap.get((i - 1) / 2)) {
+                Collections.swap(heap, i, (i - 1) / 2);
+                i = (i - 1) / 2;
+            }
             return i;
         }
 
-        void insert(Long value) { //вставка
+        void insert(Long value) {
+            heap.add(value);
+            siftUp(heap.size() - 1);
         }
 
-        Long extractMax() { //извлечение и удаление максимума
-            Long result = null;
-
-            return result;
+        Long extractMax() {
+            if (heap.isEmpty()) {
+                return null;
+            }
+            Long max = heap.get(0);
+            heap.set(0, heap.get(heap.size() - 1));
+            heap.remove(heap.size() - 1);
+            if (!heap.isEmpty()) {
+                siftDown(0);
+            }
+            return max;
         }
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! КОНЕЦ ЗАДАЧИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
     }
 
     // РЕМАРКА. Это задание исключительно учебное.
