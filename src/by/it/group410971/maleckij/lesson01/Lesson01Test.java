@@ -1,8 +1,8 @@
 package by.it.group410971.maleckij.lesson01;
 
-import by.it.a_khmelev.lesson01.FiboA;
-import by.it.a_khmelev.lesson01.FiboB;
-import by.it.a_khmelev.lesson01.FiboC;
+import by.it.group410971.maleckij.lesson01.FiboA;
+import by.it.group410971.maleckij.lesson01.FiboB;
+import by.it.group410971.maleckij.lesson01.FiboC;
 import org.junit.Test;
 
 import java.math.BigInteger;
