@@ -1,8 +1,8 @@
 package by.it.group410971.maleckij.lesson03;
 
-import by.it.a_khmelev.lesson03.A_Huffman;
-import by.it.a_khmelev.lesson03.B_Huffman;
-import by.it.a_khmelev.lesson03.C_HeapMax;
+import by.it.group410971.maleckij.lesson03.A_Huffman;
+import by.it.group410971.maleckij.lesson03.B_Huffman;
+import by.it.group410971.maleckij.lesson03.C_HeapMax;
 import org.junit.Test;
 
 import java.io.InputStream;
@@ -23,8 +23,8 @@ public class Lesson03Test {
 
     @Test
     public void checkA() throws Exception {
-        InputStream inputStream = by.it.a_khmelev.lesson03.A_Huffman.class.getResourceAsStream("dataA.txt");
-        by.it.a_khmelev.lesson03.A_Huffman instance = new A_Huffman();
+        InputStream inputStream = by.it.group410971.maleckij.lesson03.A_Huffman.class.getResourceAsStream("dataA.txt");
+        by.it.group410971.maleckij.lesson03.A_Huffman instance = new A_Huffman();
         String result = instance.encode(inputStream);
         boolean ok = result.equals("01001100100111");
         assertEquals("A failed", true, ok);
@@ -32,8 +32,8 @@ public class Lesson03Test {
 
     @Test
     public void checkB() throws Exception {
-        InputStream inputStream = by.it.a_khmelev.lesson03.B_Huffman.class.getResourceAsStream("dataB.txt");
-        by.it.a_khmelev.lesson03.B_Huffman instance = new B_Huffman();
+        InputStream inputStream = by.it.group410971.maleckij.lesson03.B_Huffman.class.getResourceAsStream("dataB.txt");
+        by.it.group410971.maleckij.lesson03.B_Huffman instance = new B_Huffman();
         String result = instance.decode(inputStream);
         boolean ok = result.equals("abacabad");
         assertTrue("B failed", ok);
@@ -41,8 +41,8 @@ public class Lesson03Test {
 
     @Test
     public void checkC() throws Exception {
-        InputStream inputStream = by.it.a_khmelev.lesson03.C_HeapMax.class.getResourceAsStream("dataC.txt");
-        by.it.a_khmelev.lesson03.C_HeapMax instance = new C_HeapMax();
+        InputStream inputStream = by.it.group410971.maleckij.lesson03.C_HeapMax.class.getResourceAsStream("dataC.txt");
+        by.it.group410971.maleckij.lesson03.C_HeapMax instance = new C_HeapMax();
         Long res = instance.findMaxValue(inputStream);
         boolean ok = (res == 500);
         assertTrue("C failed", ok);
